@@ -4,6 +4,10 @@ import '../dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
+  final Function toggleFavorite;
+  final Function isMealFavorited;
+
+  MealDetailScreen(this.toggleFavorite, this.isMealFavorited);
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Padding(
@@ -84,6 +88,14 @@ class MealDetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          isMealFavorited(mealId) ? Icons.favorite : Icons.favorite_border,
+        ),
+        onPressed: () {
+          toggleFavorite(mealId);
+        },
       ),
     );
   }
